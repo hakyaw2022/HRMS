@@ -1,0 +1,5 @@
+@startuml
+class ChangedServicePriceToInt <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

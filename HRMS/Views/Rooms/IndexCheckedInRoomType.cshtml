@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Rooms</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<hr />
+<p>
+    <a asp-action="Index">Rooms</a>
+    @for (int i = 0; i <= int.Parse(ViewData["Counter"].ToString()); i++)
+    {
+        var item = i.ToString();
+        <a asp-action="IndexCheckedInRoomType" asp-route-id="@ViewData[item]">@ViewData[item]</a>
+    }
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomStatus)
+            </th>           
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomStatus)
+            </td>           
+            <td>
+                <a asp-action="CheckOut" asp-route-id="@item.Id">Check Out</a>                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

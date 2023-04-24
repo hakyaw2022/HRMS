@@ -1,0 +1,15 @@
+@startuml
+class Disable2faModel {
+    + Disable2faModel(userManager:UserManager<IdentityUser>, logger:ILogger<Disable2faModel>)
+    + StatusMessage : string <<get>> <<set>>
+    + <<async>> OnGet() : Task<IActionResult>
+    + <<async>> OnPostAsync() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+PageModel <|-- Disable2faModel
+Disable2faModel --> "_userManager<IdentityUser>" "UserManager`1"
+Disable2faModel --> "_logger<Disable2faModel>" "ILogger`1"
+@enduml

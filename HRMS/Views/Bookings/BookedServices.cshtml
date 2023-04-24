@@ -1,0 +1,74 @@
+﻿@model IEnumerable<HRMS.Models.Booking>
+
+@{
+    ViewData["Title"] = "Serivces";
+}
+
+<h1>Booked Services</h1>
+<hr />
+<p>
+    <a asp-controller="Services" asp-action="Index">Services</a>
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Service Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th> 
+            <th>
+                Additional Requests
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+                @foreach (var service in (IEnumerable<Service>)ViewBag.Service)
+                    {
+                        if(service.Id == item.RoomId){
+                        <td>
+                            @service.Name
+                        </td>
+                        }
+                    }
+                
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                <a asp-action="StartService" asp-route-id="@item.Id">Start</a> |
+                <a asp-action="CancelService" asp-route-id="@item.Id">Cancel</a>               
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

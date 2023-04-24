@@ -1,0 +1,82 @@
+﻿@model HRMS.Models.Guest
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="row mb-5">
+
+            <h4>Edit Guest</h4>
+        </div>
+        <div class="row mb-5">
+
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NRC" class="form-label"></label>
+                    <input asp-for="NRC" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="NRC" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="mb-5">
+                    <label asp-for="Photo1" class="form-label"></label>
+                    <input asp-for="Photo1" class="form-control mb-3" accept="image/*" />
+                    <input asp-for="Photo1Name" type="hidden" />
+                    <label class="form-label">Current: @Model.Photo1Name </label>
+                    <img decoding="async" alt="@Model.Photo1Name" src="@("~/Image/Guest/Photo1/"+ Model.Photo1Name)" asp-append-version="true" class="img-thumbnail form-control-sm mx-auto float-sm-start zoom" width="50px" />
+                    <span asp-validation-for="Photo1" class="text-danger"></span>
+                </div>
+                <div class="mb-5">
+                    <label asp-for="Photo2" class="form-label"></label>
+                    <input asp-for="Photo2" class="form-control mb-3" accept="image/*" />
+                    <input asp-for="Photo2Name" type="hidden" />
+                    <label class="form-label">Current: @Model.Photo2Name</label>
+                    <img decoding="async" alt="@Model.Photo2Name" src="@("~/Image/Guest/Photo2/"+ Model.Photo2Name)" asp-append-version="true" class="img-thumbnail form-control-sm mx-auto float-sm-start zoom" width="50px" />
+                    <span asp-validation-for="Photo2" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Photo3" class="form-label"></label>
+                    <input asp-for="Photo3" class="form-control mb-3" accept="image/*" />
+                    <input asp-for="Photo3Name" type="hidden" />
+                    <label class="form-label">Current: @Model.Photo3Name</label>
+                    <img decoding="async" alt="@Model.Photo3Name" src="@("~/Image/Guest/Photo3/"+ Model.Photo3Name)" asp-append-version="true" class="img-thumbnail form-control-sm mx-auto float-sm-start zoom" width="50px" />
+                    <span asp-validation-for="Photo3" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+
+            <a asp-action="Index" class="btn btn-info">
+                <i class="material-icons">keyboard_backspace</i>
+                Back
+            </a>
+
+            <input type="submit" value="Save" class="btn btn-primary mx-3" />
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

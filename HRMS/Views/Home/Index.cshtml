@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div data-role="Admin,Manager,Receptionist">
+    <a asp-controller="Rooms" class="btn btn-outline-primary" asp-action="Index">Rooms</a>
+    <a asp-controller="Bookings" class="btn btn-outline-primary" asp-action="Index">Bookings</a>
+    <a asp-controller="Restaurants" class="btn btn-outline-primary" asp-action="Index">Restaurants</a>
+    <a asp-controller="Services" class="btn btn-outline-primary" asp-action="Index">Services</a>
+    <a asp-controller="Reports" class="btn btn-outline-primary" asp-action="Index">Reports</a>
+    <a asp-controller="Agents" class="btn btn-outline-primary" asp-action="Index">Agents</a>
+    <a asp-controller="Guests" class="btn btn-outline-primary" asp-action="Index">Guests</a>
+</div>
+<div class="container h-100">
+    <div class="row h-100 align-items-center">
+        <div class="col-12 text-center">
+            <img src="~/img/oasis/linkedin_banner_image_2.png" class="img-fluid" />
+        </div>
+    </div>
+</div>

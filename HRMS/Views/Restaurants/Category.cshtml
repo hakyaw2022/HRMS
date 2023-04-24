@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HRMS.Models.Restaurant>
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1>Order</h1>
+<hr />
+<a asp-action="Index">Restaurant</a>
+@if (ViewBag.cart != null)
+{
+    <a asp-controller="Cart" asp-action="Index">See Bill</a>
+
+    <h3>Cart Page</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Option</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Restaurant.Id">Remove</a></td>
+                <td>@item.Restaurant.Name</td>
+                <td>@item.Restaurant.UnitPrice</td>
+                <td>@item.OrderQuantity</td>
+                <td>@(item.Restaurant.UnitPrice * item.OrderQuantity)</td>
+            </tr>
+        }       
+    </table>
+}
+<hr />
+
+
+<h3>Catgories</h3>
+<hr />
+<p>
+@foreach (var item in Model.Select(s => s.Category).Distinct())
+{
+    <a asp-controller="Restaurants"
+   asp-action="Category"
+   asp-route-id="@item">@item</a>
+    
+}
+</p>
+<hr />
+
+@foreach (var item in Model.Where(s=> s.Category.Equals(ViewData["Category"])).ToList())
+{
+    <a asp-controller="Cart"
+   asp-action="Buy"
+   asp-route-id="@item.Id">@item.Name</a>
+}
+

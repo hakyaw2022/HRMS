@@ -1,0 +1,26 @@
+@startuml
+class BookingsController {
+    - price : int
+    - commentPrice : string
+    + BookingsController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + CreatePeriod() : IActionResult
+    + CreatePeriodForServiceBooking() : IActionResult
+    + <<async>> SearchAvailableServices(form:IFormCollection) : Task<IActionResult>
+    + <<async>> BookedServices() : Task<IActionResult>
+    + <<async>> StartService(id:int?) : Task<IActionResult>
+    + <<async>> SearchAvailableRooms(room:Room, form:IFormCollection) : Task<IActionResult>
+    + <<async>> Book(form:IFormCollection) : Task<IActionResult>
+    + <<async>> CreateAsync() : Task<IActionResult>
+    + {static} CompareTime(x:string, y:string) : int
+    + <<async>> Create(booking:Booking) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, booking:Booking) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - BookingExists(id:int) : bool
+}
+Controller <|-- BookingsController
+BookingsController --> "_context" ApplicationDbContext
+@enduml

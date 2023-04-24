@@ -1,0 +1,211 @@
+classDiagram 
+
+    class Agent {
+        + Id : int  
+        + Name : string  
+        + Phone : string  
+        + Address : string  
+        + NRC : string  
+        + Photo1Name : string  
+        + Photo2Name : string  
+        + Photo3Name : string  
+        + Photo1 : IFormFile  
+        + Photo2 : IFormFile  
+        + Photo3 : IFormFile  
+    }
+    Agent o-- Booking
+    Agent o-- Receipt
+
+    class BookingStatus {
+        <<enum>>
+        Available
+        Booked
+        CheckedIn
+        CheckedOut
+        Cancelled
+    }
+    class Booking {
+        + Id : int  
+        + Room : Room  
+        + RoomId : int  
+        + RoomPrice : int  
+        + Guest : Guest  
+        + GuestId : int  
+        + Comment : string  
+        + Agent : Agent  
+        + AgentId : int  
+        + RoomStatusUpdate : bool  
+        + From : DateTime  
+        + To : DateTime 
+        
+    }
+    Booking --> BookingStatus
+    Booking -- Room
+    Booking -- Guest
+
+
+
+    class CheckedInCustomer {
+        + Id : int  
+        + Room : Room  
+        + RoomId : int  
+        + Guest : Guest  
+        + GuestId : int  
+        + checkedInTimeStamp : DateTime  
+    }
+    CheckedInCustomer -- Room
+    CheckedInCustomer -- Guest
+
+    class CheckedInOutTime {
+        + Id : int  
+        + RoomType : RoomType  
+        + RoomTypeId : int  
+        + CheckedInTime : string  
+        + CheckedOutTime : string  
+    }
+    CheckedInOutTime -- RoomType
+
+    class AspNetRole {
+        + Id : int
+        + Name : string
+    }
+    
+
+    class Employee {
+        + Name : string  
+        + Address : string  
+        + NRC : string  
+        + AssignedRole : AspNetRole
+        + Photo1Name : string  
+        + Photo2Name : string  
+        + Photo3Name : string  
+        + Photo1 : IFormFile  
+        + Photo2 : IFormFile  
+        + Photo3 : IFormFile  
+    }
+    AspNetRole <|-- Employee
+
+    class Guest {
+        + Id : int  
+        + Name : string  
+        + Phone : string  
+        + Address : string  
+        + NRC : string  
+        + Photo1Name : string  
+        + Photo2Name : string  
+        + Photo3Name : string  
+        + Photo1 : IFormFile  
+        + Photo2 : IFormFile  
+        + Photo3 : IFormFile  
+    }
+
+    class Item {
+        + Restaurant : Restaurant  
+        + OrderQuantity : int  
+    }
+    Item <-- Restaurant
+
+    class Receipt {
+        + Id : int  
+        + Guest : Guest  
+        + GuestId : int  
+        + Room : Room  
+        + RoomId : int  
+        + Agent : Agent  
+        + AgentId : int  
+        + Name : string  
+        + Amount : int  
+        + ReceiptNumber : string  
+    }
+    Receipt --> TransactionType
+    Receipt -- Guest
+    Receipt -- Room
+    Receipt --o Agent
+
+    class Restaurant {
+        + Id : int  
+        + Name : string  
+        + Quantity : int  
+        + UnitPrice : int  
+        + Category : string  
+    }
+
+    class RoomStatus {
+        <<enum>>
+        Available
+        Reserved
+        Occupied
+    }
+
+    class Room {
+        + Id : int  
+        + RoomType : RoomType  
+        + RoomTypeId : int  
+        + RoomNumber : int  
+        + Guest : Guest  
+        + GuestId : int  
+    }
+    Room --> RoomStatus
+    Room --o Guest
+
+    class RoomType {
+        + Id : int  
+        + Name : string  
+        + Price : int  
+        + HourlyPrice : int  
+    }
+    Room --> RoomType
+
+    class ServiceStatus {
+        <<enum>>
+        Available
+        Unavailable
+    }
+    class PricingType {
+        <<enum>>
+        Session
+        Hour
+    }
+    class Service {
+        + Id : int  
+        + Name : string  
+        + Price : int  
+        + Capacity : int  
+        + OpenedTime : string  
+        + ClosedTime : string  
+    }
+    Service --> PricingType
+    Service --> ServiceStatus
+
+    class TransactionType {
+        <<enum>>
+        Room
+        Service
+        Restaurant
+    }
+    class TransactionStatus {
+        <<enum>>
+        Paid
+        Active
+        Inactive
+    }
+
+    class Transaction {
+        + Id : int  
+        + Room : Room  
+        + RoomId : int  
+        + Amount : int  
+        + Comment : string  
+    }
+    Transaction --> TransactionType
+    Transaction --> TransactionStatus
+    Transaction -- Room
+
+
+
+
+
+
+    
+
+

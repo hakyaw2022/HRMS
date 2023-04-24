@@ -1,0 +1,167 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using System.Globalization;
+@model HRMS.ViewModels.AllServicesViewModel
+
+<div class="container">
+    <form asp-action="AllServicesCharge">
+        <div class="row">
+            <div role="alert" class='alert alert-success alert-dismissible fade @(String.IsNullOrEmpty(ViewBag.Message)? "hide":"show")'>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @ViewBag.Message
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="mb-2">
+                    <label class="form-label">
+                        Charge to Room
+                        <small class="text-info text-muted">(only occupied rooms will be selectable)</small>
+                    </label>
+                    <select class="form-control" name="ChargeToRoom" id="ChargeToRoom">
+                        <option value="0" selected="selected">Select Room / Customer</option>
+                        @foreach (var r in Model!.Rooms)
+                        {
+                            <option value="@r.Id">
+                                @(r?.RoomType?.Name ?? "")-@(r?.RoomNumber.ToString() ?? "") - @(r?.Guest?.Name ?? "")
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-4"></div> @*to offset vertically to be same level as drop down*@
+                <button type="button" id="btn-save-charges-modal" class="btn btn-primary disabled" data-bs-toggle="modal" 
+                        data-bs-target="#confirm-selected-modal">
+                    Save Selected Charges
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs" id="service-restaurant-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="restaurant-tab" data-bs-toggle="tab" data-bs-target="#restaurant" type="button" role="tab" aria-controls="restaurant" aria-selected="true">Restaurant</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="service-tab" data-bs-toggle="tab" data-bs-target="#service" type="button" role="tab" aria-controls="service" aria-selected="false">Service</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="service-restaurant-tabContent">
+                <div class="tab-pane fade show active" id="restaurant" role="tabpanel" aria-labelledby="restaurant-tab">
+
+                    <div class="container">
+                        <div class="row mb-2"></div>
+                        <div class="row">
+                            <table class="table table-sm data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Item Code</th>
+                                        <th>Name</th>
+                                        <th class="text-end"><span class="mx-3">Price</span></th>
+                                        <th class="text-center">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(int i = 0; i < Model!.RestaurantItems!.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td><span>@Model!.RestaurantItems![i].Category</span></td>
+                                            <td><span>@Model!.RestaurantItems![i].ItemCode</span></td>
+                                            <td><span>@Model!.RestaurantItems![i].Name</span></td>
+                                            <td class="text-end"><span class="mx-3">@Model!.RestaurantItems![i].UnitPrice.ToString("C0", new CultureInfo("my-MM"))</span></td>
+                                            <td class="text-center">
+                                                <div class="input-group mx-3">
+                                                    <span class="btn btn-outline-danger btn-sm btn-reset">
+                                                        <span class="material-icons">restart_alt</span>
+                                                    </span>
+                                                    <span class="btn btn-outline-warning btn-sm btn-minus">
+                                                        <span class="material-icons">remove</span>
+                                                    </span>
+                                                    <input type="number" asp-for="@Model!.RestaurantItems![i].Quantity" class="qty-input" min="0" max="99"
+                                                           style="max-height:30px !important; max-width:80px !important; text-align:center;"
+                                                           readonly="readonly"/>
+                                                    <span class="btn btn-outline-success btn-sm btn-plus">
+                                                        <span class="material-icons">add</span>
+                                                    </span>
+                                                    <input type="hidden" asp-for="@Model!.RestaurantItems![i].Id" />
+                                                    <input type="hidden" class="display-text" asp-for="@Model!.RestaurantItems![i].DisplayText" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+                    <div class="container">
+                        <div class="row mb-2"></div>
+                        <div class="row">
+                            <table class="table data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th class="text-end"><span class="mx-3">Pricing</span></th>
+                                        <th class="text-center">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(int i = 0; i < Model!.Services!.Count(); i++) 
+                                    {
+                                        <tr>
+                                            <td><span>@Model!.Services![i].Name (@Model!.Services![i].Status.ToString())</span></td>
+                                            <td class="text-end"><span class="mx-3">@Model!.Services![i].Price.ToString("C0", new CultureInfo("my-MM")) / @Model!.Services![i].PricingType.ToString()</span></td>
+                                            <td class="text-center">
+                                                <div class="input-group mx-3">
+                                                    <span class="btn btn-outline-danger btn-sm btn-reset">
+                                                        <span class="material-icons">restart_alt</span>
+                                                    </span>
+                                                    <span class="btn btn-outline-warning btn-sm btn-minus">
+                                                        <span class="material-icons">remove</span>
+                                                    </span>
+                                                    <input type="number" asp-for="@Model!.Services![i].Quantity" class="qty-input" min="0" max="99"
+                                                           style="max-height:30px !important; max-width:80px !important; text-align:center;"
+                                                           readonly="readonly"/>
+                                                    <span class="btn btn-outline-success btn-sm btn-plus">
+                                                        <span class="material-icons">add</span>
+                                                    </span>
+                                                    <input type="hidden" asp-for="@Model!.Services![i].Id" />
+                                                    <input type="hidden" class="display-text" asp-for="@Model!.Services![i].DisplayText" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Confirm Selected Modal *@
+        <div class="modal fade" id="confirm-selected-modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm charges to be saved</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <strong class="mb-2" id="charges-for-title"></strong>
+                       <ul id="ul-services">
+                       </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close to edit</button>
+                        <button type="submit" id="btn-submit" class="btn btn-primary">Save Charges</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

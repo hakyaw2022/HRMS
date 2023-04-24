@@ -1,0 +1,104 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+@{
+    ViewData["Title"] = "Walkin Select Room";
+}
+
+<h4>Select Room</h4>
+
+<form asp-action="BookWalkin">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Guest Name</label>
+                @Html.DropDownList("GuestId", (SelectList)ViewData["Guests"], new { @class = "form-control" })
+            </div>
+            <div class="mb-3" hidden>
+                <label class="form-label">Agent Name</label>
+                @Html.DropDownList("AgentId", (SelectList)ViewData["Agents"], string.Empty, new { @class = "form-control" })
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comment</label>
+                <input name="Comment" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Proceed" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table data-table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomTypeId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomStatus)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" data-group="chkgroup" name="@i" value="@item.Id" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomType.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomStatus)
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+            <input type="hidden" name="total" value="@i" />
+            <input type="hidden" name="fromDate" value="@ViewBag.FromDate" />
+            <input type="hidden" name="toDate" value="@ViewBag.ToDate" />
+            <input type="hidden" name="fromTime" value="@ViewBag.FromTime" />
+            <input type="hidden" name="toTime" value="@ViewBag.toTime" />
+            <input type="hidden" name="roomTypeId" value="@ViewBag.RoomTypeId" />
+        </div>
+    </div>
+</form>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // the selector will match all input controls of type :checkbox
+            // and attach a click event handler
+            $("input:checkbox").on('click', function () {
+                // in the handler, 'this' refers to the box clicked on
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    // the group of the box is retrieved using the .attr() method
+                    // as it is assumed and expected to be immutable
+                    var group = "input:checkbox[data-group='" + $box.attr("data-group") + "']";
+                    // the checked state of the group/box on the other hand will change
+                    // and the current value is retrieved using .prop() method
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+        });
+
+    </script>
+}

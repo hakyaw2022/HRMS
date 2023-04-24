@@ -1,0 +1,16 @@
+@startuml
+class Receipt {
+    + Id : int <<get>> <<set>>
+    + Guest : Guest? <<get>> <<set>>
+    + GuestId : int? <<get>> <<set>>
+    + Room : Room? <<get>> <<set>>
+    + RoomId : int? <<get>> <<set>>
+    + Agent : Agent? <<get>> <<set>>
+    + AgentId : int? <<get>> <<set>>
+    + Name : string? <<get>> <<set>>
+    + Amount : int <<get>> <<set>>
+    + ReceiptNumber : string? <<get>> <<set>>
+}
+Receipt --> "CreatedDate" DateTime
+Receipt --> "TransactionType" TransactionType
+@enduml

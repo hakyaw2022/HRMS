@@ -1,0 +1,20 @@
+@startuml
+enum ServiceStatus {
+    Available,
+    Unavailable,
+}
+enum PricingType {
+    Session,
+    Hour,
+}
+class Service <<partial>> {
+    + Id : int <<get>> <<set>>
+    + Name : string? <<get>> <<set>>
+    + Price : int <<get>> <<set>>
+    + Capacity : int <<get>> <<set>>
+    + OpenedTime : string? <<get>> <<set>>
+    + ClosedTime : string? <<get>> <<set>>
+}
+Service --> "PricingType" PricingType
+Service --> "Status" ServiceStatus
+@enduml

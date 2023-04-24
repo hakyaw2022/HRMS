@@ -1,0 +1,7 @@
+@startuml
+class SessionHelper <<static>> {
+    + {static} SetObjectAsJson(session:ISession, key:string, value:object) : void
+    + {static} GetObjectFromJson(session:ISession, key:string) : T?
+    + {static} DeleteObjectFromJson(session:ISession, key:string) : void
+}
+@enduml

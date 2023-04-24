@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HRMS.Models.Receipt>
+@{
+    ViewData["Title"] = "Receipt";
+}
+<h3>
+    Income from @ViewBag.Type
+</h3>
+<p>
+    From: @ViewBag.From
+</p>
+<p>
+    To: @ViewBag.To
+</p>
+<p>
+    Total: is @ViewBag.Total
+</p>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>
+                Receipt Number
+            </th>
+            <th>
+                RoomId
+            </th>
+            <th>
+                AgentId
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Created Date
+            </th>
+        </tr>        
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiptNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

@@ -1,0 +1,74 @@
+﻿@model HRMS.Models.Guest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div class="row mb-5">
+
+            <h4>Create a customer profile</h4>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NRC" class="form-label"></label>
+                    <input asp-for="NRC" class="form-control" />
+                    <span asp-validation-for="NRC" class="text-danger"></span>
+                </div>
+                <br /> <br />
+                <div class="mb-3">
+                    <label asp-for="Photo1" class="form-label"></label>
+                    <input asp-for="Photo1" accept="image/*" />
+                    <span asp-validation-for="Photo1" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="mb-3">
+                    <label asp-for="Photo2" class="form-label"></label>
+                    <input asp-for="Photo2" accept="image/*" />
+                    <span asp-validation-for="Photo2" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="mb-3">
+                    <label asp-for="Photo3" class="form-label"></label>
+                    <input asp-for="Photo3" accept="image/*" />
+                    <span asp-validation-for="Photo3" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+
+        <input type="submit" value="Create" class="btn btn-primary mx-3" />
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

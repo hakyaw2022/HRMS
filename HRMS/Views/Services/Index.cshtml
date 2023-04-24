@@ -1,0 +1,95 @@
+﻿@model IEnumerable<HRMS.Models.Service>
+
+@{
+    ViewData["Title"] = "Service";
+}
+
+@*<h1>Services</h1>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col"><h4>Manage Services</h4></div>
+        <div class="col">
+
+            <p>
+                <a asp-action="Create" class="btn btn-outline-primary">
+                    <i class="material-icons opacity-10">add_circle_outline</i>
+                    Add New
+                </a>
+                @* <a asp-controller="Bookings" asp-action="CreatePeriodForServiceBooking">Book</a>
+                <a asp-controller="Bookings" asp-action="BookedServices">Booked Services</a>*@
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table data-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PricingType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Capacity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OpenedTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClosedTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PricingType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Capacity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpenedTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClosedTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                                <i class="material-icons">visibility</i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

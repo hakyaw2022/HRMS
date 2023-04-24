@@ -1,0 +1,5 @@
+@startuml
+class MakeGuestIdNullableInReceipt <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

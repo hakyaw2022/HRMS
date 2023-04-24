@@ -1,0 +1,25 @@
+@startuml
+enum BookingStatus {
+    Available
+    Booked
+    CheckedIn
+    CheckedOut
+    Cancelled
+}
+class Booking {
+    + Id : int <<get>> <<set>>
+    + Room : Room? <<get>> <<set>>
+    + RoomId : int <<get>> <<set>>
+    + RoomPrice : int <<get>> <<set>>
+    + Guest : Guest? <<get>> <<set>>
+    + GuestId : int <<get>> <<set>>
+    + Comment : string? <<get>> <<set>>
+    + Agent : Agent? <<get>> <<set>>
+    + AgentId : int? <<get>> <<set>>
+    + RoomStatusUpdate : bool <<get>> <<set>>
+    + From : DateTime <<get>> <<set>>
+    + To : DateTime <<get>><<set>>
+    
+}
+Booking --> "BookingStatus" BookingStatus
+@enduml

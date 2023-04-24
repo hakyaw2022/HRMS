@@ -1,0 +1,16 @@
+@startuml
+class CheckedInOutTimesController {
+    + CheckedInOutTimesController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(checkedInOutTime:CheckedInOutTime, form:IFormCollection) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, checkedInOutTime:CheckedInOutTime, form:IFormCollection) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - CheckedInOutTimeExists(id:int) : bool
+}
+Controller <|-- CheckedInOutTimesController
+CheckedInOutTimesController --> "_context" ApplicationDbContext
+@enduml

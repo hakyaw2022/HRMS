@@ -1,0 +1,54 @@
+﻿@model HRMS.Models.Room
+
+@{
+    ViewData["Title"] = "Create Room";
+}
+
+@*<h1>Create</h1>*@
+
+<div class="container">
+
+    <form asp-action="Create">
+        <div class="row mb-5">
+            <h4>Create a new Room</h4>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="RoomTypeId" class="form-label"></label>
+                    <div class="row">
+                        <div class="col-6">
+                            <select asp-for="RoomTypeId" class="form-select" asp-items="ViewBag.RoomTypeId"></select>
+                        </div>
+                        <div class="col-6">
+                            <a asp-controller="RoomTypes" asp-action="Index" class="btn btn-outline-primary">
+                                New Room Type
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Room Number - Start</label>
+                    <input name="From" type="number" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Room Number - End</label>
+                    <input name="To" type="number" class="form-control" />
+                </div>
+                <div class="mb-3 visually-hidden">
+                    <label asp-for="RoomStatus" class="form-label"></label>
+                    <select asp-for="RoomStatus" class="form-select" asp-items="Html.GetEnumSelectList<RoomStatus>()"></select>
+                    <span asp-validation-for="RoomStatus" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+
+        <input type="submit" value="Create" class="btn btn-primary mx-3" />
+    </form>
+</div>

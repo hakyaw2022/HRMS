@@ -1,0 +1,79 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+@{
+    ViewData["Title"] = "Booking Rooms";
+}
+
+<h1>Booking Rooms</h1>
+
+<form asp-action="Book">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Guest Name</label>
+                @Html.DropDownList("GuestId", (SelectList)ViewData["Guests"], new { @class = "form-control" })
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Agent Name</label>
+                @Html.DropDownList("AgentId", (SelectList)ViewData["Agents"], string.Empty, new { @class = "form-control" })
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comment</label>
+                <input name="Comment" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table data-table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomTypeId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoomStatus)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="@i" value="@item.Id" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomType.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoomStatus)
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+            <input type="hidden" name="total" value="@i" />
+            <input type="hidden" name="fromDate" value="@ViewBag.FromDate" />
+            <input type="hidden" name="toDate" value="@ViewBag.ToDate" />
+            <input type="hidden" name="fromTime" value="@ViewBag.FromTime" />
+            <input type="hidden" name="toTime" value="@ViewBag.toTime" />
+            <input type="hidden" name="roomTypeId" value="@ViewBag.RoomTypeId" />
+        </div>
+    </div>
+</form>
+

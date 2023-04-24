@@ -1,0 +1,16 @@
+@startuml
+class ReportsController {
+    + ReportsController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + DetailsView() : ActionResult
+    + <<async>> Details(form:IFormCollection) : Task<IActionResult>
+    + Create() : ActionResult
+    + Create(collection:IFormCollection) : ActionResult
+    + Edit(id:int) : ActionResult
+    + Edit(id:int, collection:IFormCollection) : ActionResult
+    + Delete(id:int) : ActionResult
+    + Delete(id:int, collection:IFormCollection) : ActionResult
+}
+Controller <|-- ReportsController
+ReportsController --> "_context" ApplicationDbContext
+@enduml

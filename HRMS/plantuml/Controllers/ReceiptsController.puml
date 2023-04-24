@@ -1,0 +1,16 @@
+@startuml
+class ReceiptsController {
+    + ReceiptsController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Details(id:string?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(receipt:Receipt) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, receipt:Receipt) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - ReceiptExists(id:int) : bool
+}
+Controller <|-- ReceiptsController
+ReceiptsController --> "_context" ApplicationDbContext
+@enduml

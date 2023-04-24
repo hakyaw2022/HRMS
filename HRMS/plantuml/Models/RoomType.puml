@@ -1,0 +1,8 @@
+@startuml
+class RoomType {
+    + Id : int <<get>> <<set>>
+    + Name : string? <<get>> <<set>>
+    + Price : int <<get>> <<set>>
+    + HourlyPrice : int <<get>> <<set>>
+}
+@enduml

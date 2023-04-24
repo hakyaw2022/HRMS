@@ -1,0 +1,63 @@
+﻿<h1>
+    Reports
+</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+       Total Income
+    </dt>
+    <dd class="col-sm-10">
+       @ViewBag.TotalIncome
+    </dd>
+    <dt class="col-sm-2">
+       Income From Room
+    </dt>
+    <dd class="col-sm-10">
+       @ViewBag.IncomeFromRoom
+    </dd>
+    <dt class="col-sm-2">
+       Income From Service
+    </dt>
+    <dd class="col-sm-10">
+      @ViewBag.IncomeFromService
+    </dd>
+    <dt class="col-sm-2">
+       Income From Restaurant
+    </dt>
+    <dd class="col-sm-10">
+       @ViewBag.IncomeFromRestaurant
+    </dd>
+    <dt class="col-sm-2">
+        Total Bookings
+    </dt>
+    <dd class="col-sm-10">
+        @ViewBag.TotalBookings
+    </dd>
+    @foreach (KeyValuePair<string, int> item in ViewBag.BookedRoomTypes)
+    {
+        <dt class="col-sm-2">
+            @item.Key
+        </dt>
+        <dd class="col-sm-10">
+            @item.Value
+        </dd>
+    }
+    <dt class="col-sm-2">
+        Checked In Rooms
+    </dt>
+    <dd class="col-sm-10">
+        @ViewBag.CheckedInRooms
+    </dd>
+    <dt class="col-sm-2">
+        Checked In Customers
+    </dt>
+    <dd class="col-sm-10">
+        @ViewBag.CheckedInCustomers
+    </dd>
+    <dt class="col-sm-2">
+        Checked Out Rooms
+    </dt>
+    <dd class="col-sm-10">
+        @ViewBag.CheckedOutRooms
+    </dd>
+</dl>

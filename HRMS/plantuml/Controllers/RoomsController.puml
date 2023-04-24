@@ -1,0 +1,32 @@
+@startuml
+class RoomsController {
+    + RoomsController(context:ApplicationDbContext)
+    + Index() : IActionResult
+    + <<async>> IndexAvailable() : Task<IActionResult>
+    + <<async>> IndexReserved() : Task<IActionResult>
+    + <<async>> IndexCheckedIn() : Task<IActionResult>
+    + Get_context() : ApplicationDbContext
+    + <<async>> IndexAvailableRoomType(id:string) : Task<IActionResult>
+    + <<async>> IndexReservedRoomType(id:string) : Task<IActionResult>
+    + <<async>> IndexCheckedInRoomType(id:string) : Task<IActionResult>
+    + <<async>> WalkIn() : Task<IActionResult>
+    + <<async>> WalkInFindRooms(form:IFormCollection, guests:List<Guest>, guestsCheckedIn:List<CheckedInCustomer>) : Task<IActionResult>
+    + <<async>> CheckIn(id:string, guests:List<Guest>, guestsCheckedIn:List<CheckedInCustomer>) : Task<IActionResult>
+    + <<async>> CheckIn(id:string, form:IFormCollection) : Task<IActionResult>
+    + <<async>> WalkInCheckIn(id:string, form:IFormCollection) : Task<IActionResult>
+    + <<async>> CheckOut(id:string) : Task<IActionResult>
+    + <<async>> SaveReceipts(form:IFormCollection) : Task<IActionResult>
+    + <<async>> Receipt() : Task<IActionResult>
+    + DownloadPdf(form:IFormCollection) : ActionResult
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(room:Room, form:IFormCollection) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, room:Room) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - RoomExists(id:int) : bool
+}
+Controller <|-- RoomsController
+RoomsController --> "_context" ApplicationDbContext
+@enduml

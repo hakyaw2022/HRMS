@@ -1,0 +1,60 @@
+﻿@model HRMS.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <form asp-action="Edit">
+        <div class="row mb-5">
+
+            <h4>Edit restaurant menu item</h4>
+        </div>
+        <div class="row mb-5">
+
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label"></label>
+                    <input asp-for="Category" class="form-control" list="categories" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ItemCode" class="form-label"></label>
+                    <input asp-for="ItemCode" class="form-control" />
+                    <span asp-validation-for="ItemCode" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="UnitPrice" class="form-label"></label>
+                    <input asp-for="UnitPrice" class="form-control" />
+                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+        <input type="submit" value="Save" class="btn btn-primary mx-3" />
+    </form>
+</div>
+<datalist id="categories">
+    @foreach (var item in ViewBag.Categories)
+    {
+        <option>@item</option>
+    }
+</datalist>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

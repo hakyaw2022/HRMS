@@ -1,0 +1,10 @@
+@startuml
+class CheckedInCustomer {
+    + Id : int <<get>> <<set>>
+    + Room : Room? <<get>> <<set>>
+    + RoomId : int <<get>> <<set>>
+    + Guest : Guest? <<get>> <<set>>
+    + GuestId : int <<get>> <<set>>
+    + checkedInTimeStamp : DateTime <<get>> <<set>>
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class MakeAgentIdAndRoomIdNullableInReceipt <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

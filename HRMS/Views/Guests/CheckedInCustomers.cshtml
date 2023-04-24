@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HRMS.Models.CheckedInCustomer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col">
+
+            <h4>Checked In Customers</h4>
+        </div>
+        <div class="col">
+
+            <p>
+                <a asp-action="Index" class="btn btn-outline-primary">All Customers</a>
+            </p>
+        </div>
+    </div>
+    <div class="row mb-5">
+
+        <table class="table data-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Guest.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Guest.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Room.RoomNumber)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Guest.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+@startuml
+class RestaurantsController {
+    + RestaurantsController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Order() : Task<IActionResult>
+    + <<async>> Category(id:string?) : Task<ActionResult>
+    + <<async>> TransactionCreate(id:int?) : Task<ActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(restaurant:Restaurant) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, restaurant:Restaurant) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - RestaurantExists(id:int) : bool
+}
+Controller <|-- RestaurantsController
+RestaurantsController --> "_context" ApplicationDbContext
+@enduml

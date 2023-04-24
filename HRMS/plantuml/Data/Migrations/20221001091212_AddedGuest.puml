@@ -1,0 +1,7 @@
+@startuml
+class AddedGuest <<partial>> {
+    # <<override>> Up(migrationBuilder:MigrationBuilder) : void
+    # <<override>> Down(migrationBuilder:MigrationBuilder) : void
+}
+Migration <|-- AddedGuest
+@enduml

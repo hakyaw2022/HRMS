@@ -1,0 +1,45 @@
+﻿<h1>
+    Reports
+</h1>
+<hr />
+@if (ViewBag.Message is not null)
+{
+    <p>@ViewBag.Message</p>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label class="form-label">Report Type</label>
+                <select name="report_type" class="form-select">
+                    <option value="room_income">
+                        Income from Room
+                    </option>
+                    <option value="service_income">
+                        Income from Service
+                    </option>
+                    <option value="retaurant_income">
+                        Income from Restaurant
+                    </option>
+                    <option value="total_bookings">
+                        Total Bookings
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <lable class="control-lable">From Date:</lable>
+                <input name="from_date" type="date" />               
+            </div>
+
+            <div class="mb-3">
+                <lable class="control-lable">To Date:</lable>
+                <input name="to_date" type="date"/>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

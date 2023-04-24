@@ -1,0 +1,42 @@
+﻿@model HRMS.Models.Room
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <form asp-action="Edit">
+        <div class="row mb-5">
+            <h4>Edit Room</h4>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="RoomTypeId" class="form-label"></label>
+                    <select asp-for="RoomTypeId" class="form-select" asp-items="ViewBag.RoomTypeId"></select>
+                    <span asp-validation-for="RoomTypeId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="RoomNumber" class="form-label"></label>
+                    <input asp-for="RoomNumber" class="form-control" />
+                    <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="RoomStatus" class="form-label"></label>
+                    <input asp-for="RoomStatus" class="form-control" />
+                    <span asp-validation-for="RoomStatus" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+            <a asp-action="Index" class="btn btn-info">
+                <i class="material-icons">keyboard_backspace</i>
+                Back
+            </a>
+            <input type="submit" value="Save" class="btn btn-primary" />
+
+    </form>
+</div>

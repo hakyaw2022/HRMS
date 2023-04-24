@@ -1,0 +1,103 @@
+﻿@model HRMS.Models.CheckedInOutTime
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <form asp-action="Edit">
+        <div class="row mb-5">
+            <h4>Edit Check In Out Time</h4>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="RoomTypeId" class="form-label"></label>
+                    <select asp-for="RoomTypeId" class="form-select" asp-items="ViewBag.RoomTypeId"></select>
+                    <span asp-validation-for="RoomTypeId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <lable class="form-label">Checked In Hour:</lable>
+                    <select name="CheckedInHour" class="form-select">
+                        @for (int i = 1; i <= 24; i++)
+                        {
+                            @if (i < 10)
+                            {
+                                string iString = i.ToString();
+                                iString = "0" + iString;
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                    <lable class="form-label">Minute:</lable>
+                    <select name="CheckedInMinute" class="form-select">
+                        @for (int i = 0; i <= 60; i = i + 10)
+                        {
+                            @if (i == 0)
+                            {
+                                string iString = i.ToString();
+                                iString = "00";
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <lable class="form-label">Checked Out Hour:</lable>
+                    <select name="CheckedOutHour" class="form-select">
+                        @for (int i = 1; i <= 24; i++)
+                        {
+                            @if (i < 10)
+                            {
+                                string iString = i.ToString();
+                                iString = "0" + iString;
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                    <lable class="form-label">Minute:</lable>
+                    <select name="CheckedOutMinute" class="form-select">
+                        @for (int i = 0; i <= 60; i = i + 10)
+                        {
+                            @if (i == 0)
+                            {
+                                string iString = i.ToString();
+                                iString = "00";
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+
+        <input type="submit" value="Save" class="btn btn-primary mx-3" />
+    </form>
+</div>

@@ -1,0 +1,22 @@
+@startuml
+enum TransactionType {
+    Room,
+    Service,
+    Restaurant,
+}
+enum TransactionStatus {
+    Paid,
+    Active,
+    Inactive,
+}
+class Transaction {
+    + Id : int <<get>> <<set>>
+    + Room : Room? <<get>> <<set>>
+    + RoomId : int? <<get>> <<set>>
+    + Amount : int <<get>> <<set>>
+    + Comment : string? <<get>> <<set>>
+}
+Transaction --> "TransactionType" TransactionType
+Transaction --> "TransactionStatus" TransactionStatus
+Transaction --> "CreatedDate" DateTime
+@enduml

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HRMS.Models.Booking>
+@{
+    ViewData["Title"] = "Booking";
+}
+<h3>
+    Total Bookings
+</h3>
+<p>
+    From: @ViewBag.From
+</p>
+<p>
+    To: @ViewBag.To
+</p>
+<p>
+    Total Rooms Booked is @ViewBag.Total
+</p>
+<p>
+    Total Number of Days: is @ViewBag.DaysBooked
+</p>
+<hr />
+<table>
+    <thead>
+        <tr>           
+            <th>
+                Room Number
+            </th>
+            <th>
+                Agent Name
+            </th>
+            <th>
+                Guest Name
+            </th>
+            <th>
+                Room Type
+            </th>
+            <th>
+                Room Price
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agent.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomType.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

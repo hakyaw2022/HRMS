@@ -1,0 +1,18 @@
+@startuml
+class ResetAuthenticatorModel {
+    + ResetAuthenticatorModel(userManager:UserManager<IdentityUser>, signInManager:SignInManager<IdentityUser>, logger:ILogger<ResetAuthenticatorModel>)
+    + StatusMessage : string <<get>> <<set>>
+    + <<async>> OnGet() : Task<IActionResult>
+    + <<async>> OnPostAsync() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "SignInManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+PageModel <|-- ResetAuthenticatorModel
+ResetAuthenticatorModel --> "_userManager<IdentityUser>" "UserManager`1"
+ResetAuthenticatorModel --> "_signInManager<IdentityUser>" "SignInManager`1"
+ResetAuthenticatorModel --> "_logger<ResetAuthenticatorModel>" "ILogger`1"
+@enduml

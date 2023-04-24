@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HRMS.Models.Transaction>
+@{
+    ViewData["Title"] = "Order";
+}
+
+    <h3>Cart Page</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Option</th>            
+            <th>Name</th>            
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Restaurant.Id">Remove</a></td>                
+                <td>@item.Restaurant.Name</td>
+                <td>@item.Restaurant.UnitPrice</td>
+                <td>@item.OrderQuantity</td>
+                <td>@(item.Restaurant.UnitPrice * item.OrderQuantity)</td>
+            </tr>
+        }
+        <tr>
+            <td align="right" colspan="6">Sum</td>
+            <td>
+                @ViewBag.total
+            </td>
+        </tr>
+    </table>
+    <br>
+    <a asp-controller="Restaurants" asp-action="Order">Menu</a>
+    <hr />
+    <a asp-controller="Cart" asp-action="charge_now">Charge Now</a>
+    <hr />
+   
+    @foreach (var room in ViewBag.rooms)
+    {
+        <a asp-controller="Cart" asp-action="charge" asp-route-id="@room.Id">@room.RoomNumber</a>
+    }
+    
+    

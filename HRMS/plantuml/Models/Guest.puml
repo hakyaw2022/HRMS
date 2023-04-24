@@ -1,0 +1,17 @@
+@startuml
+class Guest {
+    - <<const>> V : int = 1
+    + Id : int <<get>> <<set>>
+    + Name : string? <<get>> <<set>>
+    + Phone : string? <<get>> <<set>>
+    + Address : string? <<get>> <<set>>
+    + NRC : string? <<get>> <<set>>
+    + Photo1Name : string? <<get>> <<set>>
+    + Photo2Name : string? <<get>> <<set>>
+    + Photo3Name : string? <<get>> <<set>>
+    + Photo1 : IFormFile? <<get>> <<set>>
+    + Photo2 : IFormFile? <<get>> <<set>>
+    + Photo3 : IFormFile? <<get>> <<set>>
+}
+Guest --> "CreatedDate" DateTime
+@enduml

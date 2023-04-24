@@ -1,0 +1,17 @@
+@startuml
+class ResendEmailConfirmationModel {
+    + ResendEmailConfirmationModel(userManager:UserManager<IdentityUser>, emailSender:IEmailSender)
+    + OnGet() : void
+    + <<async>> OnPostAsync() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class InputModel {
+    + Email : string <<get>> <<set>>
+}
+PageModel <|-- ResendEmailConfirmationModel
+ResendEmailConfirmationModel --> "_userManager<IdentityUser>" "UserManager`1"
+ResendEmailConfirmationModel --> "_emailSender" IEmailSender
+ResendEmailConfirmationModel --> "Input" InputModel
+ResendEmailConfirmationModel +-- InputModel
+@enduml

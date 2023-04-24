@@ -1,0 +1,17 @@
+@startuml
+class AgentsController {
+    + AgentsController(context:ApplicationDbContext, hostEnvironment:IWebHostEnvironment)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(agent:Agent) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, agent:Agent) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - AgentExists(id:int) : bool
+}
+Controller <|-- AgentsController
+AgentsController --> "_context" ApplicationDbContext
+AgentsController --> "_hostEnvironment" IWebHostEnvironment
+@enduml

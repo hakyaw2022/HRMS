@@ -1,0 +1,63 @@
+﻿@model HRMS.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <form asp-action="Edit">
+        <div class="row mb-5">
+
+            <h4>Edit Booking</h4>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="RoomId" class="form-label"></label>
+                    <select asp-for="RoomId" class="form-select" asp-items="ViewBag.Rooms"></select>
+                    <span asp-validation-for="RoomId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="GuestId" class="form-label"></label>
+                    <select asp-for="GuestId" class="form-select" asp-items="ViewBag.Guests"></select>
+                    <span asp-validation-for="GuestId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="From" class="form-label"></label>
+                    <input asp-for="From" type="date" class="form-control date" />
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="To" class="form-label"></label>
+                    <input asp-for="To" type="date" class="form-control date" />
+                    <span asp-validation-for="To" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="BookingStatus" class="form-label"></label>
+                    <select asp-for="BookingStatus" class="form-select"
+                            asp-items="@Html.GetEnumSelectList<BookingStatus>()"></select>
+                    <span asp-validation-for="BookingStatus" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="AgentId" class="form-label"></label>
+                    @Html.DropDownList("AgentId", (SelectList)ViewData["Agents"], string.Empty,
+                    new {@class = "form-control"})
+                    <span asp-validation-for="AgentId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+        <input type="submit" value="Save" class="btn btn-primary mx-3" />
+
+    </form>
+</div>
+
+

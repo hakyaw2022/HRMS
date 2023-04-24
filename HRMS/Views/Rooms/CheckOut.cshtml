@@ -1,0 +1,265 @@
+﻿@using System.Globalization;
+@model IEnumerable<HRMS.Models.Transaction>
+@{
+    ViewData["Title"] = "Check Out";
+    var room = ViewBag.Room;
+}
+
+<div class="container d-print-block">
+    <form>
+        <div class="row mb-3">
+            <div class="col-sm-8">
+                <h4>Check out Summary</h4>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-secondary" onclick="window.print()">Print Receipt</button>
+
+                <a asp-controller="Rooms" asp-action="CheckOutConfirmed"
+                   asp-route-id="@ViewBag.RoomId"
+                   class="btn btn-primary">
+                    Check Out
+                </a>
+            </div>
+        </div>
+        <dl class="row mb-5">
+            <dt class="col-sm-3">Room:</dt>
+            <dd class="col-sm-9">@room.RoomType.Name - @room.RoomNumber</dd>
+            <dt class="col-sm-3">Booked Dates:</dt>
+            <dd class="col-sm-9">
+                @room.CurrentBookedFrom.ToString("yyyy-MM-dd") to @room.CurrentBookedTo.ToString("yyyy-MM-dd")
+            </dd>
+            <dt class="col-sm-3">Check in/out Dates:</dt>
+            <dd class="col-sm-9">
+                @room.CurrentBookedFrom.ToString("yyyy-MM-dd") to @ViewBag.Today.ToString("yyyy-MM-dd")
+            </dd>
+            <dt class="col-sm-3">Guest:</dt>
+            <dd class="col-sm-9">
+            </dd>
+            <dt class="col-sm-3">
+                &nbsp; &nbsp; &nbsp; &nbsp; Booked by:
+            </dt>
+            <dd class="col-sm-9">
+                @room.Guest.Name <small class="text-muted">(@room.Guest.NRC)</small>
+            </dd>
+            <dt class="col-sm-3">
+                &nbsp; &nbsp; &nbsp; &nbsp; CheckedIn by:
+            </dt>
+            <dd class="col-sm-9">
+                @room.CheckedInCustomer.Guest.Name <small class="text-muted">(@room.CheckedInCustomer.Guest.NRC)</small>
+            </dd>
+        </dl>
+
+        <div class="row mb-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Item</th>
+                        <th class="text-end"><span class="mx-3">Quantity</span></th>
+                        <th class="text-end"><span class="mx-3">Unit Price</span></th>
+                        <th class="text-end"><span class="mx-3">Sub Total</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CreatedDate.ToString("yyyy MMM dd")</td>
+
+                            @if (@item.TransactionType == TransactionType.RoomDeposit)
+                            {
+                                <td>Deposit</td>
+                            }
+                            else if (@item.TransactionType == TransactionType.Room)
+                            {
+                                <td>Room Fee</td>
+                            }
+                            else if (@item.TransactionType == TransactionType.Service)
+                            {
+                                <td>@item!.Service!.Name</td>
+                            }
+                            else
+                            {
+                                <td>@item!.Restaurant!.ItemCode - @item!.Restaurant.Name</td>
+                            }
+
+                            <td class="text-end"><span class="mx-3">@Math.Max(1, item.Quantity)</span></td>
+
+                            @if (@item.TransactionType == TransactionType.RoomDeposit)
+                            {
+                                <td class="text-end"><span class="mx-3">@((-1 * item.Amount).ToString("C0", new CultureInfo("my-MM")))</span> </td>
+                            }
+                            else
+                            {
+                                <td class="text-end"><span class="mx-3">@item.Amount.ToString("C0", new CultureInfo("my-MM"))</span> </td>
+                            }
+
+                            @if (@item.TransactionType == TransactionType.RoomDeposit)
+                            {
+                                <td class="text-end"><span class="mx-3">@((-1 * item.SubTotal).ToString("C0", new CultureInfo("my-MM"))) </span> </td>
+                            }
+                            else
+                            {
+                                <td class="text-end"><span class="mx-3">@item.SubTotal.ToString("C0", new CultureInfo("my-MM")) </span></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+@*                    <tr>
+                        <td colspan="4">
+                            Discount <small class="text-muted">(-)</small>
+                            /
+                            Additional Charges<small class="text-muted">(+)</small>
+                        </td>
+                        <td class="text-end"><span class="mx-3"><input id="input-discount" type="number" min="0" value="0" /></span></td>
+                    </tr>
+*@                    <tr>
+                        <td colspan="4"><strong>Grand Total</strong></td>
+                        <td class="text-end font-weight-bolder">
+                            <span class="mx-3">
+                                <strong>
+                                    <span id="grand-total">
+                                        @ViewBag.GrandTotal.ToString("C0", new CultureInfo("my-MM"))
+                                    </span>
+                                </strong>
+                            </span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var discount = $('#input-discount').val();
+            //var grandTotal = $('#grand-total').text();
+            //console.log(@ViewBag.GrandTotal);
+            //console.log(discount, grandTotal);
+        });
+    </script>
+}
+
+@*
+<a asp-controller="Rooms" asp-action="Index">Rooms</a>
+<hr />
+<form asp-action="SaveReceipts">
+    <label>Comment for additional adjustment</label>
+    <input type="text" name="Comment0" />
+    <label>Amount</label>
+    <input type="number" name="Amount0" />
+    @{
+        string increment = "1";
+        string comment = "Comment" + increment;
+        string amount = "Amount" + increment;
+        string type = "Type" + increment;
+        int counter = 1;
+    }
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Amount
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                @if (item.TransactionType == TransactionType.Restaurant)
+                {
+                    var restaurantOrder = item.Comment.Split("--");
+                    foreach (var order in restaurantOrder)
+                    {
+                        var orderSplit = order.Split("-");
+                        int total = int.Parse(orderSplit[1]) * int.Parse(orderSplit[2]);
+                        string orderDetails = orderSplit[0] + "-" + orderSplit[1] + "x" + orderSplit[2];
+                        <tr>
+                            <td>
+                                @orderDetails
+                            </td>
+                            <td>
+                                @total
+                            </td>
+                        </tr>
+                        <input type="hidden" name=@comment value="@orderDetails" />
+                        <input type="hidden" name="@amount" value="@total" />
+                        <input type="hidden" name="@type" value="@TransactionType.Restaurant" />
+                        int incrementInt = int.Parse(increment);
+                        incrementInt++;
+                        increment = incrementInt.ToString();
+                        comment = "Comment" + increment;
+                        amount = "Amount" + increment;
+                        type = "Type" + increment;
+                        counter++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                    </tr>
+                    <input type="hidden" name=@comment value="@item.Comment" />
+                    <input type="hidden" name="@amount" value="@item.Amount" />
+                    <input type="hidden" name="@type" value="@item.TransactionType" />
+                    int incrementInt = int.Parse(increment);
+                    incrementInt++;
+                    increment = incrementInt.ToString();
+                    comment = "Comment" + increment;
+                    amount = "Amount" + increment;
+                    type = "Type" + increment;
+                    counter++;
+                }
+            }
+        </tbody>
+    </table>
+    <input type="hidden" name="GuestId" value="@ViewBag.GuestId" />
+    <input type="hidden" name="AgentId" value="@ViewBag.AgentId" />
+    <input type="hidden" name="RoomId" value="@ViewBag.RoomId" />
+    <input type="hidden" name="Counter" value="@counter" />
+    <input type="submit" value="Create Receipt" class="btn btn-primary" />
+</form>
+<dl>
+    <dt>
+        Customer Name
+    </dt>
+    <dd>
+        @ViewBag.GuestName
+    </dd>
+    <dt>
+        Total
+    </dt>
+    <dd>
+        @ViewBag.Total
+    </dd>
+    <dt>
+        Deposit
+    </dt>
+    <dd>
+        @ViewBag.Deposit
+    </dd>
+    <dt>
+        To Receive From Guest
+    </dt>
+    <dd>
+        @ViewBag.ToSettle
+    </dd>
+</dl>
+
+
+
+
+*@

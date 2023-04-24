@@ -1,0 +1,6 @@
+@startuml
+class Item {
+    + Restaurant : Restaurant? <<get>> <<set>>
+    + OrderQuantity : int <<get>> <<set>>
+}
+@enduml

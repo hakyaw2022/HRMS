@@ -1,0 +1,9 @@
+@startuml
+class Restaurant {
+    + Id : int <<get>> <<set>>
+    + Name : string? <<get>> <<set>>
+    + Quantity : int? <<get>> <<set>>
+    + UnitPrice : int <<get>> <<set>>
+    + Category : string? <<get>> <<set>>
+}
+@enduml

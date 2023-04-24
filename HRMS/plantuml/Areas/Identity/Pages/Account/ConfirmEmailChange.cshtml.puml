@@ -1,0 +1,14 @@
+@startuml
+class ConfirmEmailChangeModel {
+    + ConfirmEmailChangeModel(userManager:UserManager<IdentityUser>, signInManager:SignInManager<IdentityUser>)
+    + StatusMessage : string <<get>> <<set>>
+    + <<async>> OnGetAsync(userId:string, email:string, code:string) : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "SignInManager`1"<T> {
+}
+PageModel <|-- ConfirmEmailChangeModel
+ConfirmEmailChangeModel --> "_userManager<IdentityUser>" "UserManager`1"
+ConfirmEmailChangeModel --> "_signInManager<IdentityUser>" "SignInManager`1"
+@enduml

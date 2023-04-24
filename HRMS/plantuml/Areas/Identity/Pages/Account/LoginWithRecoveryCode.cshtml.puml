@@ -1,0 +1,23 @@
+@startuml
+class LoginWithRecoveryCodeModel {
+    + LoginWithRecoveryCodeModel(signInManager:SignInManager<IdentityUser>, userManager:UserManager<IdentityUser>, logger:ILogger<LoginWithRecoveryCodeModel>)
+    + ReturnUrl : string <<get>> <<set>>
+    + <<async>> OnGetAsync(returnUrl:string) : Task<IActionResult>
+    + <<async>> OnPostAsync(returnUrl:string) : Task<IActionResult>
+}
+class "SignInManager`1"<T> {
+}
+class "UserManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+class InputModel {
+    + RecoveryCode : string <<get>> <<set>>
+}
+PageModel <|-- LoginWithRecoveryCodeModel
+LoginWithRecoveryCodeModel --> "_signInManager<IdentityUser>" "SignInManager`1"
+LoginWithRecoveryCodeModel --> "_userManager<IdentityUser>" "UserManager`1"
+LoginWithRecoveryCodeModel --> "_logger<LoginWithRecoveryCodeModel>" "ILogger`1"
+LoginWithRecoveryCodeModel --> "Input" InputModel
+LoginWithRecoveryCodeModel +-- InputModel
+@enduml

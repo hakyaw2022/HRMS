@@ -1,0 +1,85 @@
+﻿@model HRMS.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Create New Restaurant";
+}
+
+@*<h1>Create</h1>*@
+<div class="container">
+
+    <form asp-action="Create">
+        <div class="row mb-5">
+
+            <h4>Create a new restaurant menu item</h4>
+        </div>
+        <div class="row mb-5">
+
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label"></label>
+                    <input asp-for="Category" class="form-control" list="categories" id="input-cat" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" id="input-name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ItemCode" class="form-label"></label>
+                    <input asp-for="ItemCode" class="form-control" id="input-item" />
+                    <span asp-validation-for="ItemCode" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="UnitPrice" class="form-label"></label>
+                    <input asp-for="UnitPrice" class="form-control" />
+                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+        <input type="submit" value="Create" class="btn btn-primary mx-3" />
+    </form>
+</div>
+
+<datalist id="categories">
+    @foreach (var item in ViewBag.Categories)
+    {
+        <option>@item</option>
+    }
+</datalist>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $('#input-cat').on('keyup change', makeItemCode);
+                $('#input-name').on('keyup change', makeItemCode);
+
+                function makeItemCode(){
+                    var cat = $('#input-cat').val();
+                    var name = $('#input-name').val();
+                    var itm = $('#input-item').val();
+
+                    
+                    if(cat.length >= 2 && name.length >= 2 && itm.length == 0){
+                        var ic = cat.trim().toUpperCase().substring(0,2)
+                                 + '-'
+                                 + name.trim().toUpperCase().substring(0,2)
+                                 + '-'
+                                 + `@ViewBag.ItemNumber`
+
+                    $('#input-item').val(ic);
+                    }
+                };
+            });
+        </script>
+}

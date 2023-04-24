@@ -1,0 +1,79 @@
+- All edit page has disabled input missing value problem -- complete
+
+- Booking
+	- booking create return url has error -- complete
+		- probably because that room type doesn't have checkin/out time setup. Add a check for that. -- complete
+	- Edit page still has hour, minute selections -- complete
+	- Edit page - same room can be selected twice -- to develop popup available room selection
+	- create page - to add guest nrc display -- complete
+	- if a booking is deleted, room status should be updated to available -- complete
+	- booking cancel process
+
+- Checked in/out pages are not linked yet. And there is an error. -- complete 
+- to style checked in/out pages 
+
+- Room Type
+	- name missing after price update -- complete
+
+- Room
+	- Delete room has FK conflict error -- complete
+	- Edit should check for existing booking, checkin, transactions -- rooms cant be edited anymore, only delete and create
+	- After deleting, returning to main Room Index page
+- Agent 
+	- Agent create page should be in Setup category  -- complete
+	- name missing in Edit page -- complete
+
+- Guest
+	- Picture upload has error -- complete
+
+
+- Restaurants
+	- the header should be restaurant items -- complete
+	- category --> Menu Category -- complete
+
+- Service
+	- create - remove status -- complete
+	- Edit - status change not saved -- complete
+
+- paginated tables -- complete
+- searchable tables -- complete
+
+- booking flow
+	- search room (search by all room type), select room, add guest info (if new - add inplace entry form)
+
+
+- improvements:
+	- to change long drop down list with data list  
+	- login page, cursor default to username input  -- complete
+	- booking create page - selected dates disappear after an error message -- complete
+		- guest name, agent name searchable drop down list
+	- show check in/out dates on check in page
+	- 'new guest' button on check in page
+	- guests index page needs to be styled
+	- images to have thumbnails and full image
+	- 
+
+- user roles
+	- read ko Htet's report for details -- complete
+	- admin, manager, receptionist -- complete
+
+- admin 
+	- delete users -- complete
+	- reset user passwords -- complete
+	- fix user access role to pages -- partial
+	
+- reset the database to original state - to go to debug/reset-database -- complete 
+- to view all visitable links - debug/routes -- complete
+- to draw usecase and class diagram -- complete
+
+- checkin
+	- show booked date range on manage page -- complete
+	- 1 guest selection instead of 5, default selection : guest who booked. -- complete
+	- if checkedin, don't even show those records - complete
+	- show only booked for today in list -- complete
+
+
+
+- transactions part
+
+

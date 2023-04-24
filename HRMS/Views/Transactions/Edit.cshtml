@@ -1,0 +1,62 @@
+﻿@model HRMS.Models.Transaction
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Transaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label asp-for="TransactionType" class="form-label"></label>
+                <select asp-for="TransactionType" class="form-select"></select>
+                <span asp-validation-for="TransactionType" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="TransactionStatus" class="form-label"></label>
+                <select asp-for="TransactionStatus" class="form-select"></select>
+                <span asp-validation-for="TransactionStatus" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="RoomId" class="form-label"></label>
+                <select asp-for="RoomId" class="form-select" asp-items="ViewBag.RoomId"></select>
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Amount" class="form-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Comment" class="form-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CreatedDate" class="form-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-info">
+        <i class="material-icons">keyboard_backspace</i>
+        Back
+    </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

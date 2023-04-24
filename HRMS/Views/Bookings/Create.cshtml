@@ -1,0 +1,55 @@
+﻿@model HRMS.Models.Booking
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="RoomId" class="form-label"></label>
+                <select asp-for="RoomId" class ="form-select" asp-items="ViewBag.RoomId"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="GuestId" class="form-label"></label>
+                <select asp-for="GuestId" class ="form-select" asp-items="ViewBag.GuestId"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="From" class="form-label"></label>
+                <input asp-for="From" class="form-control" />
+                <span asp-validation-for="From" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="To" class="form-label"></label>
+                <input asp-for="To" class="form-control" />
+                <span asp-validation-for="To" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="AgentId" class="form-label"></label>
+                <%= Html.DropDownList( "DropDownValue",
+                (IEnumerable<SelectListItem>
+                    )ViewData["AgentId"],
+                    "-- Select One --" ) %>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <a asp-action="Index" class="btn btn-outline-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+    </div>
+</div>
+

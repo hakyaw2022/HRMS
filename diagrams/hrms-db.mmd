@@ -1,0 +1,221 @@
+classDiagram
+      
+class __EFMigrationsHistory {
+    MigrationId
+          ProductVersion
+          
+}
+        
+class AspNetRoles {
+    ConcurrencyStamp
+          Id
+          Name
+          NormalizedName
+          
+}
+        
+class AspNetUsers {
+    AccessFailedCount
+          ConcurrencyStamp
+          Email
+          EmailConfirmed
+          Id
+          LockoutEnabled
+          LockoutEnd
+          NormalizedEmail
+          NormalizedUserName
+          PasswordHash
+          PhoneNumber
+          PhoneNumberConfirmed
+          SecurityStamp
+          TwoFactorEnabled
+          UserName
+          
+}
+        
+class AspNetRoleClaims {
+    ClaimType
+          ClaimValue
+          Id
+          RoleId
+          
+}
+        
+class AspNetUserClaims {
+    ClaimType
+          ClaimValue
+          Id
+          UserId
+          
+}
+        
+class AspNetUserLogins {
+    LoginProvider
+          ProviderDisplayName
+          ProviderKey
+          UserId
+          
+}
+        
+class AspNetUserRoles {
+    RoleId
+          UserId
+          
+}
+        
+class AspNetUserTokens {
+    LoginProvider
+          Name
+          UserId
+          Value
+          
+}
+        
+class Agent {
+    Address
+          CreatedDate
+          Id
+          Name
+          NRC
+          Phone
+          Photo1Name
+          Photo2Name
+          Photo3Name
+          
+}
+        
+class Guest {
+    Address
+          CreatedDate
+          Id
+          Name
+          NRC
+          Phone
+          Photo1Name
+          Photo2Name
+          Photo3Name
+          
+}
+        
+class Restaurant {
+    Category
+          Id
+          Name
+          Quantity
+          UnitPrice
+          
+}
+        
+class RoomType {
+    HourlyPrice
+          Id
+          Name
+          Price
+          
+}
+        
+class Room {
+    GuestId
+          Id
+          RoomNumber
+          RoomStatus
+          RoomTypeId
+          
+}
+        
+class Booking {
+    AgentId
+          BookingStatus
+          Comment
+          CreatedDate
+          From
+          GuestId
+          Id
+          RoomId
+          RoomPrice
+          RoomStatusUpdate
+          To
+          
+}
+        
+class Transaction {
+    Amount
+          Comment
+          CreatedDate
+          Id
+          RoomId
+          TransactionStatus
+          TransactionType
+          
+}
+        
+class CheckedInOutTime {
+    CheckedInTime
+          CheckedOutTime
+          Id
+          RoomTypeId
+          
+}
+        
+class CheckedInCustomer {
+    checkedInTimeStamp
+          GuestId
+          Id
+          RoomId
+          
+}
+        
+class Service {
+    Capacity
+          ClosedTime
+          Id
+          Name
+          OpenedTime
+          Price
+          PricingType
+          Status
+          
+}
+        
+class Receipt {
+    AgentId
+          Amount
+          CreatedDate
+          GuestId
+          Id
+          Name
+          ReceiptNumber
+          RoomId
+          TransactionType
+          
+}
+        
+class sysdiagrams {
+    definition
+          diagram_id
+          name
+          principal_id
+          version
+          
+}
+        
+      AspNetRoleClaims --|> AspNetRoles: Id
+            AspNetUserClaims --|> AspNetUsers: Id
+            AspNetUserLogins --|> AspNetUsers: Id
+            AspNetUserRoles --|> AspNetRoles: Id
+            AspNetUserRoles --|> AspNetUsers: Id
+            AspNetUserTokens --|> AspNetUsers: Id
+            Room --|> Guest: Id
+            Room --|> RoomType: Id
+            Booking --|> Agent: Id
+            Booking --|> Guest: Id
+            Booking --|> Room: Id
+            Transaction --|> Room: Id
+            CheckedInOutTime --|> RoomType: Id
+            CheckedInCustomer --|> Guest: Id
+            CheckedInCustomer --|> Room: Id
+            Receipt --|> Agent: Id
+            Receipt --|> Guest: Id
+            Receipt --|> Room: Id
+            
+      

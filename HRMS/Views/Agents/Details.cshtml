@@ -1,0 +1,72 @@
+﻿@model HRMS.Models.Agent
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<h1>Details</h1>*@
+
+<div class="container">
+    <div class="row mb-5">
+        <h4>Agent Detail</h4>
+    </div>
+    <dl class="row mb-5">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NRC)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NRC)
+        </dd>
+        <dt class="col-sm-2">Photos</dt>
+        <dd class="col-sm-10">
+            <img decoding="async" alt="@Model.Photo1Name" src="@("~/Image/Agent/Photo1/"+ Model.Photo1Name)" asp-append-version="true" class="img-thumbnail mx-auto float-sm-start zoom" width="250px" />
+            <img decoding="async" alt="@Model.Photo2Name" src="@("~/Image/Agent/Photo2/"+ Model.Photo2Name)" asp-append-version="true" class="img-thumbnail mx-auto float-sm-start zoom" width="250px" />
+            <img decoding="async" alt="@Model.Photo3Name" src="@("~/Image/Agent/Photo3/"+ Model.Photo3Name)" asp-append-version="true" class="img-thumbnail mx-auto float-sm-start zoom" width="250px" />
+        </dd>
+        @*
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Photo1)
+        </dt>
+        <dd class="col-sm-10">
+
+        <img decoding="async" src="@("~/Image/Agent/Photo1/"+ Model.Photo1Name)" asp-append-version="true" class="" width="1000px" height="1000px" />
+        </dd>
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Photo2)
+        </dt>
+        <dd class="col-sm-10">
+        <img decoding="async" src="@("~/Image/Agent/Photo2/"+ Model.Photo2Name)" asp-append-version="true" width="1000px" height="1000px" />
+        </dd>
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Photo3)
+        </dt>
+        <dd class="col-sm-10">
+        <img decoding="async" src="@("~/Image/Agent/Photo3/"+ Model.Photo3Name)" asp-append-version="true" width="1000px" height="1000px" />
+        </dd>
+        *@
+    </dl>
+
+    <a asp-action="Index" class="btn btn-info">
+        <i class="material-icons">keyboard_backspace</i>
+        Back
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary mx-3">Edit</a>
+</div>

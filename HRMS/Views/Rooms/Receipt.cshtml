@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HRMS.Models.Receipt>
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<h1>Receipt</h1>
+<hr />
+<a asp-controller="Rooms" asp-action="Index">Rooms</a>
+<hr />
+<div id="receiptItems">
+<p>Agent: @ViewData["Agent"]</p>
+<p>Guest: @ViewData["Guest"]</p>
+<p>Room Number: @ViewData["Room"]</p>
+<p>Total Amount: @ViewData["Total"]</p>
+<table class="table">
+    <thead>
+        <tr>            
+            <th>
+                Description
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<form asp-action="DownloadPdf">
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" id="btnSubmit" value="Export" />
+</form>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($('#receiptItems').html());
+        });
+    });
+</script>
+
+
+
+
+
+
+

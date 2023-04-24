@@ -1,0 +1,5 @@
+@startuml
+class AddedTransactionTypeInReceipt <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

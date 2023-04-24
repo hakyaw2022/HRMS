@@ -1,0 +1,25 @@
+@startuml
+enum RoomStatus {
+    Available,
+    Reserved,
+    ReservedHourly,
+    Occupied,
+    Cleaning,
+    DND,
+    Maintenance,
+    Unknown,
+}
+class Rooms {
+    + From : int <<get>> <<set>>
+    + To : int <<get>> <<set>>
+}
+class Room {
+    + Id : int <<get>> <<set>>
+    + RoomType : RoomType? <<get>> <<set>>
+    + RoomTypeId : int <<get>> <<set>>
+    + RoomNumber : int <<get>> <<set>>
+    + Guest : Guest? <<get>> <<set>>
+    + GuestId : int? <<get>> <<set>>
+}
+Room --> "RoomStatus" RoomStatus
+@enduml

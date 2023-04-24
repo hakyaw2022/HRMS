@@ -1,0 +1,16 @@
+@startuml
+class TransactionsController {
+    + TransactionsController(context:ApplicationDbContext)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(transaction:Transaction) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, transaction:Transaction) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - TransactionExists(id:int) : bool
+}
+Controller <|-- TransactionsController
+TransactionsController --> "_context" ApplicationDbContext
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class GuestsController {
+    + GuestsController(context:ApplicationDbContext, hostEnvironment:IWebHostEnvironment)
+    + <<async>> Index() : Task<IActionResult>
+    + <<async>> CheckedInCustomers() : Task<IActionResult>
+    + <<async>> Details(id:int?) : Task<IActionResult>
+    + Create() : IActionResult
+    + <<async>> Create(guest:Guest) : Task<IActionResult>
+    + <<async>> Edit(id:int?) : Task<IActionResult>
+    + <<async>> Edit(id:int, guest:Guest) : Task<IActionResult>
+    + <<async>> Delete(id:int?) : Task<IActionResult>
+    + <<async>> DeleteConfirmed(id:int) : Task<IActionResult>
+    - GuestExists(id:int) : bool
+}
+Controller <|-- GuestsController
+GuestsController --> "_context" ApplicationDbContext
+GuestsController --> "_hostEnvironment" IWebHostEnvironment
+@enduml

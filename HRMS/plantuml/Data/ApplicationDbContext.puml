@@ -1,0 +1,19 @@
+@startuml
+class ApplicationDbContext {
+    + ApplicationDbContext(options:DbContextOptions<ApplicationDbContext>)
+}
+class "DbSet`1"<T> {
+}
+IdentityDbContext <|-- ApplicationDbContext
+ApplicationDbContext --> "Agent<HRMS.Models.Agent>" "DbSet`1"
+ApplicationDbContext --> "Service<HRMS.Models.Service>" "DbSet`1"
+ApplicationDbContext --> "Guest<HRMS.Models.Guest>" "DbSet`1"
+ApplicationDbContext --> "Restaurant<HRMS.Models.Restaurant>" "DbSet`1"
+ApplicationDbContext --> "Room<HRMS.Models.Room>" "DbSet`1"
+ApplicationDbContext --> "RoomType<HRMS.Models.RoomType>" "DbSet`1"
+ApplicationDbContext --> "Transaction<HRMS.Models.Transaction>" "DbSet`1"
+ApplicationDbContext --> "Booking<HRMS.Models.Booking>" "DbSet`1"
+ApplicationDbContext --> "CheckedInOutTime<HRMS.Models.CheckedInOutTime>" "DbSet`1"
+ApplicationDbContext --> "CheckedInCustomer<HRMS.Models.CheckedInCustomer>" "DbSet`1"
+ApplicationDbContext --> "Receipt<HRMS.Models.Receipt>" "DbSet`1"
+@enduml

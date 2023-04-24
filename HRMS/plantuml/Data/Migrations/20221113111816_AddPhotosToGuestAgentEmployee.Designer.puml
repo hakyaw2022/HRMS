@@ -1,0 +1,5 @@
+@startuml
+class AddPhotosToGuestAgentEmployee <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

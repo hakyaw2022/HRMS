@@ -1,0 +1,15 @@
+@startuml
+class GenerateRecoveryCodesModel {
+    + GenerateRecoveryCodesModel(userManager:UserManager<IdentityUser>, logger:ILogger<GenerateRecoveryCodesModel>)
+    + StatusMessage : string <<get>> <<set>>
+    + <<async>> OnGetAsync() : Task<IActionResult>
+    + <<async>> OnPostAsync() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+PageModel <|-- GenerateRecoveryCodesModel
+GenerateRecoveryCodesModel --> "_userManager<IdentityUser>" "UserManager`1"
+GenerateRecoveryCodesModel --> "_logger<GenerateRecoveryCodesModel>" "ILogger`1"
+@enduml

@@ -1,0 +1,38 @@
+﻿@model HRMS.Models.Transaction
+
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<h1>Receipt</h1>
+<hr />
+<a asp-controller="Services" asp-action="Index">Service</a>
+<hr />
+<div>    
+    <dl class="row">
+        <dt class="col-sm-2">
+            Service
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class="col-sm-2">
+            Guest Name
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.Name
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+    </dl>
+</div>

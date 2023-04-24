@@ -1,0 +1,5 @@
+@startuml
+class CreateIdentitySchema <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

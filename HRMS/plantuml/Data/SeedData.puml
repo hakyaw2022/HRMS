@@ -1,0 +1,7 @@
+@startuml
+class SeedData {
+    + {static} <<async>> Initialize(serviceProvider:IServiceProvider, testUserPw:string) : Task
+    - {static} <<async>> EnsureUser(serviceProvider:IServiceProvider, testUserPw:string, UserName:string) : Task<string>
+    - {static} <<async>> EnsureRole(serviceProvider:IServiceProvider, uid:string, role:string) : Task<IdentityResult>
+}
+@enduml

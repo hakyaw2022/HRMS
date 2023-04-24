@@ -1,0 +1,143 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Rooms</h1>*@
+<div class="container">
+    <div class="row mb-3">
+        <h4>Manage Rooms</h4>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <p>
+                <a asp-action="Create" class="btn btn-primary" data-role="Admin,Manager">
+                    <i class="material-icons opacity-10">add_circle_outline</i>
+                    Add New
+                </a>
+
+
+                <button id="btn-all" class="btn btn-dark">
+                    <i class="material-icons">apps</i>
+                    All Rooms
+                </button>
+
+                <button id="btn-available" class="btn btn-success">
+                    <i class="material-icons">event_available</i>
+                    Available Rooms
+                </button>
+                @*                <a asp-action="IndexAvailable" class="btn btn-success">
+                <i class="material-icons">event_available</i>
+                Available Rooms
+                </a>
+                *@
+                <button id="btn-reserved" class="btn btn-warning">
+                    <i class="material-icons">edit_calendar</i>
+                    Reserved Rooms
+                </button>
+                @*                <a asp-action="IndexReserved" class="btn btn-warning">
+                <i class="material-icons">edit_calendar</i>
+                Reserved Rooms
+                </a>
+                *@
+                <button id="btn-checkin" class="btn btn-info">
+                    <i class="material-icons">event</i>
+                    Checked In Rooms
+                </button>
+                @*<a asp-action="IndexCheckedIn" class="btn btn-info">
+                <i class="material-icons">event</i>
+                Checked In Rooms
+                </a>
+                *@
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <table id="room-list" class="table data-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNumber)
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomStatus)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomType.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomStatus)
+                        </td>
+                        <td>
+                            @* <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                        <i class="material-icons">edit</i>
+                        </a>*@
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                                <i class="material-icons">visibility</i>
+                            </a>
+                            @{
+                                if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                {
+                                    if (item.RoomStatus == RoomStatus.Available)
+                                    {
+
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-outline-dark disabled">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    }
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#room-list').DataTable();
+            $('#btn-all').on('click', function () {
+                table.search('').draw();
+            });
+            $('#btn-available').on('click', function () {
+                table.search('available').draw();
+            });
+            $('#btn-reserved').on('click', function () {
+                table.search('reserved').draw();
+            });
+            $('#btn-checkin').on('click', function () {
+                table.search('occupied').draw();
+            });
+        });
+    </script>
+}

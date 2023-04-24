@@ -1,0 +1,89 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Rooms</h1>*@
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <hr />
+    <p>
+        <a asp-action="Index">Rooms</a>
+        @for (int i = 0; i <= int.Parse(ViewData["Counter"].ToString()); i++)
+        {
+            var item = i.ToString();
+            <a asp-action="IndexCheckedInRoomType" asp-route-id="@ViewData[item]">@ViewData[item]</a>
+        }
+
+    </p>*@
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col"><h4>Check out</h4></div>
+    </div>
+    <div class="row mb-3">
+        <table class="table data-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Guest)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                        </td>
+                        <td>
+                            <span>
+                                @item.RoomStatus
+                                <small class="text-muted">
+                                    (
+                                    @(item.CurrentBookedFrom == null
+                                        ? "" : ((DateTime)item.CurrentBookedFrom).ToString("yyyy-MM-dd"))
+                                    -->
+                                    @(item.CurrentBookedTo == null
+                                        ? "" : ((DateTime)item.CurrentBookedTo).ToString("yyyy-MM-dd"))
+                                    )
+                                </small>
+                            </span>
+                        </td>
+                        <td>
+                            <span>@(item?.Guest?.Name ?? "")<small class="text-muted">(@(item?.Guest?.NRC ?? "")</small></span>
+                            <br>
+                            <small class="text-muted">
+                                <strong>Checked in guest:</strong>
+                                @(item?.CheckedInCustomer?.Guest?.Name ?? "") (@(item?.CheckedInCustomer?.Guest?.NRC ?? ""))
+                            </small>
+                        </td>
+                        <td>
+                            <a asp-action="CheckOut" class="btn btn-danger" asp-route-id="@item.Id">
+                                <i class="material-icons">event_repeat</i>
+                                Check Out
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

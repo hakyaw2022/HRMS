@@ -1,0 +1,86 @@
+﻿@model IEnumerable<HRMS.Models.Booking>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col"><h4>Manage Bookings</h4></div>
+        <div class="col">
+            <p>
+                <a asp-action="CreatePeriod" class="btn btn-outline-primary">
+                    <i class="material-icons opacity-10">add_circle_outline</i>
+                    New Booking
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+
+        @if (Model is not null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Room)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Guest)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.From)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.To)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BookingStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Agent)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                            </td>
+                            <td>
+                                <span>@(item?.Guest?.Name ?? "") <small class="text-muted">(@(item?.Guest?.NRC ?? "")</small></span>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.From)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.To)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Agent.Name)
+                            </td>
+                            <td>
+@*                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                                    <i class="material-icons">edit</i>
+                                </a>
+*@                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

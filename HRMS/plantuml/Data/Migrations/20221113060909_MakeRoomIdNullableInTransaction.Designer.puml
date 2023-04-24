@@ -1,0 +1,5 @@
+@startuml
+class MakeRoomIdNullableInTransaction <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

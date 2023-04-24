@@ -1,0 +1,9 @@
+@startuml
+class CheckedInOutTime {
+    + Id : int <<get>> <<set>>
+    + RoomType : RoomType? <<get>> <<set>>
+    + RoomTypeId : int <<get>> <<set>>
+    + CheckedInTime : string? <<get>> <<set>>
+    + CheckedOutTime : string? <<get>> <<set>>
+}
+@enduml

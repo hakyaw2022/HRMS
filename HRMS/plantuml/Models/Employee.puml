@@ -1,0 +1,15 @@
+@startuml
+class Employee {
+    + Name : string? <<get>> <<set>>
+    + Address : string? <<get>> <<set>>
+    + NRC : string? <<get>> <<set>>
+    + Photo1Name : string? <<get>> <<set>>
+    + Photo2Name : string? <<get>> <<set>>
+    + Photo3Name : string? <<get>> <<set>>
+    + Photo1 : IFormFile? <<get>> <<set>>
+    + Photo2 : IFormFile? <<get>> <<set>>
+    + Photo3 : IFormFile? <<get>> <<set>>
+}
+IdentityUser <|-- Employee
+Employee --> "CreatedDate" DateTime
+@enduml

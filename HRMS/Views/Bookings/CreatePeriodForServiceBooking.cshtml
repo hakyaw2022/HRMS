@@ -1,0 +1,111 @@
+﻿@model HRMS.Models.Service
+
+@{
+    ViewData["Title"] = "Servcie Booking";
+}
+<h1>Service Booking</h1>
+<hr />
+@if (ViewBag.Message is not null)
+{
+    <p>@ViewBag.Message</p>
+}
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="SearchAvailableServices">            
+            <div class="mb-3">
+                <label class="form-label">Services</label>
+                <select name="ServiceId" class="form-select">
+                    @foreach(var item in ViewBag.Service){
+                        <option value="@item.Id">@item.Name ( @item.OpenedTime - @item.ClosedTime )</option>
+                    }
+                    
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Customer Name</label>
+                <select name="GuestId" class="form-select" asp-items="ViewBag.Guest"></select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Additional Request (Please leave it blank if you do not have any)</label>
+                <textarea type="text" name="Comment" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date:</label>
+                <input name="Date" type="date" value=@DateTime.Now.Date/>
+            </div>
+            <div class="mb-3">                
+                <label class="form-label">From Hour:</label>
+                <select name="FromHour" class="form-select">
+                    @for (int i = 1; i <= 24; i++)
+                    {
+                        @if (i < 10)
+                        {
+                            string iString = i.ToString();
+                            iString = "0" + iString;
+                            <option value="@iString">@iString</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+                <label class="form-label">Minute:</label>
+                <select name="FromMinute" class="form-select">
+                    @for (int i = 0; i <= 60; i = i + 10)
+                    {
+                        @if (i == 0)
+                        {
+                            string iString = i.ToString();
+                            iString = "00";
+                            <option value="@iString">@iString</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="mb-3">                
+                <label class="form-label">To Hour:</label>
+                <select name="ToHour" class="form-select">
+                    @for (int i = 1; i <= 24; i++)
+                    {
+                        @if (i < 10)
+                        {
+                            string iString = i.ToString();
+                            iString = "0" + iString;
+                            <option value="@iString">@iString</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+                <label class="form-label">Minute:</label>
+                <select name="ToMinute" class="form-select">
+                    @for (int i = 0; i <= 60; i = i + 10)
+                    {
+                        @if (i == 0)
+                        {
+                            string iString = i.ToString();
+                            iString = "00";
+                            <option value="@iString">@iString</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

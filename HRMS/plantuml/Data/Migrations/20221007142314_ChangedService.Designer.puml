@@ -1,0 +1,5 @@
+@startuml
+class ChangedService <<partial>> {
+    # <<override>> BuildTargetModel(modelBuilder:ModelBuilder) : void
+}
+@enduml

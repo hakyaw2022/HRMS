@@ -1,0 +1,13 @@
+@startuml
+class PersonalDataModel {
+    + PersonalDataModel(userManager:UserManager<IdentityUser>, logger:ILogger<PersonalDataModel>)
+    + <<async>> OnGet() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+PageModel <|-- PersonalDataModel
+PersonalDataModel --> "_userManager<IdentityUser>" "UserManager`1"
+PersonalDataModel --> "_logger<PersonalDataModel>" "ILogger`1"
+@enduml

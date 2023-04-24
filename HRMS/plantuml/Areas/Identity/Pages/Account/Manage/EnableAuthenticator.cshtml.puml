@@ -1,0 +1,27 @@
+@startuml
+class EnableAuthenticatorModel {
+    - <<const>> AuthenticatorUriFormat : string = "otpauth://totp/{0&#125;:{1&#125;?secret={2&#125;&issuer={0&#125;&digits=6"
+    + EnableAuthenticatorModel(userManager:UserManager<IdentityUser>, logger:ILogger<EnableAuthenticatorModel>, urlEncoder:UrlEncoder)
+    + SharedKey : string <<get>> <<set>>
+    + AuthenticatorUri : string <<get>> <<set>>
+    + StatusMessage : string <<get>> <<set>>
+    + <<async>> OnGetAsync() : Task<IActionResult>
+    + <<async>> OnPostAsync() : Task<IActionResult>
+    - <<async>> LoadSharedKeyAndQrCodeUriAsync(user:IdentityUser) : Task
+    - FormatKey(unformattedKey:string) : string
+    - GenerateQrCodeUri(email:string, unformattedKey:string) : string
+}
+class "UserManager`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+class InputModel {
+    + Code : string <<get>> <<set>>
+}
+PageModel <|-- EnableAuthenticatorModel
+EnableAuthenticatorModel --> "_userManager<IdentityUser>" "UserManager`1"
+EnableAuthenticatorModel --> "_logger<EnableAuthenticatorModel>" "ILogger`1"
+EnableAuthenticatorModel --> "_urlEncoder" UrlEncoder
+EnableAuthenticatorModel --> "Input" InputModel
+EnableAuthenticatorModel +-- InputModel
+@enduml

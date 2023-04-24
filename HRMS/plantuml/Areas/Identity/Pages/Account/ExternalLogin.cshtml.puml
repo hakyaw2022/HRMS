@@ -1,0 +1,36 @@
+@startuml
+class ExternalLoginModel {
+    + ExternalLoginModel(signInManager:SignInManager<IdentityUser>, userManager:UserManager<IdentityUser>, userStore:IUserStore<IdentityUser>, logger:ILogger<ExternalLoginModel>, emailSender:IEmailSender)
+    + ProviderDisplayName : string <<get>> <<set>>
+    + ReturnUrl : string <<get>> <<set>>
+    + ErrorMessage : string <<get>> <<set>>
+    + OnGet() : IActionResult
+    + OnPost(provider:string, returnUrl:string) : IActionResult
+    + <<async>> OnGetCallbackAsync(returnUrl:string, remoteError:string) : Task<IActionResult>
+    + <<async>> OnPostConfirmationAsync(returnUrl:string) : Task<IActionResult>
+    - CreateUser() : IdentityUser
+    - GetEmailStore() : IUserEmailStore<IdentityUser>
+}
+class "SignInManager`1"<T> {
+}
+class "UserManager`1"<T> {
+}
+class "IUserStore`1"<T> {
+}
+class "IUserEmailStore`1"<T> {
+}
+class "ILogger`1"<T> {
+}
+class InputModel {
+    + Email : string <<get>> <<set>>
+}
+PageModel <|-- ExternalLoginModel
+ExternalLoginModel --> "_signInManager<IdentityUser>" "SignInManager`1"
+ExternalLoginModel --> "_userManager<IdentityUser>" "UserManager`1"
+ExternalLoginModel --> "_userStore<IdentityUser>" "IUserStore`1"
+ExternalLoginModel --> "_emailStore<IdentityUser>" "IUserEmailStore`1"
+ExternalLoginModel --> "_emailSender" IEmailSender
+ExternalLoginModel --> "_logger<ExternalLoginModel>" "ILogger`1"
+ExternalLoginModel --> "Input" InputModel
+ExternalLoginModel +-- InputModel
+@enduml

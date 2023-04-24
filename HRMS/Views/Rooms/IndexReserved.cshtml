@@ -1,0 +1,93 @@
+﻿@model IEnumerable<HRMS.Models.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Rooms</h1>*@
+<div class="container">
+    <div class="row mb-3">
+        <div class="col"><h4>Check in</h4></div>
+        <!--<div class="col">
+            <p>
+                <a asp-action="Create" class="btn btn-outline-primary">
+                    <i class="material-icons opacity-10">add_circle_outline</i>
+                    Add New
+                </a>
+                <a asp-action="Index" class="btn btn-outline-info">
+                    <i class="material-icons">keyboard_backspace</i>
+                    Back
+                </a>
+            </p>-->
+        @*<hr />
+        <p>
+        <a asp-action="Index">Rooms</a>
+        @for (int i = 0; i <= int.Parse(ViewData["Counter"].ToString()); i++)
+        {
+        var item = i.ToString();
+        <a asp-action="IndexReservedRoomType" asp-route-id="@ViewData[item]">@ViewData[item]</a>
+        }
+
+        </p>
+        <hr />*@
+        <!--</div>-->
+    </div>
+    <div class="row mb-3">
+        <table class="table data-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Guest)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item!.RoomType!.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item!.RoomNumber)
+                        </td>
+                        <td>
+                            <span>
+                                @item.RoomStatus
+                                <small class="text-muted">
+                                    (
+                                    @(item.CurrentBookedFrom == null
+                                        ? "" : ((DateTime)item.CurrentBookedFrom).ToString("yyyy-MM-dd"))
+                                    -->
+                                    @(item.CurrentBookedTo == null
+                                        ? "" : ((DateTime)item.CurrentBookedTo).ToString("yyyy-MM-dd"))
+                                    )
+                                </small>
+                            </span>
+                        </td>
+                        <td>
+                            <span>@(item?.Guest?.Name ?? "") <small class="text-muted">(@(item?.Guest?.NRC ?? ""))</small></span>
+                        </td>
+                        <td>
+                            <a asp-action="CheckIn" class="btn btn-info" asp-route-id="@item.Id">
+                                <i class="material-icons">event</i>
+                                Check In
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

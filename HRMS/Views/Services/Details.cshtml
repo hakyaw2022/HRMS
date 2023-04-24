@@ -1,0 +1,62 @@
+﻿@model HRMS.Models.Service
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<h1>Details</h1>*@
+
+<div class="container">
+    <div class="row mb-5">
+        <h4>Service Detail</h4>
+    </div>
+    <dl class="row mb-5">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PricingType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PricingType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OpenedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OpenedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClosedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClosedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    <a asp-action="Index" class="btn btn-info">
+        <i class="material-icons">keyboard_backspace</i>
+        Back
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary mx-3">Edit</a>
+</div>

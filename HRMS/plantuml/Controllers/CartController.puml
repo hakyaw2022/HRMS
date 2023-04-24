@@ -1,0 +1,13 @@
+@startuml
+class CartController {
+    + CartController(context:ApplicationDbContext)
+    + <<async>> IndexAsync() : Task<IActionResult>
+    + <<async>> BuyAsync(id:int) : Task<IActionResult>
+    + Remove(id:int) : IActionResult
+    + <<async>> charge(id:int, transaction:Transaction) : Task<IActionResult>
+    + <<async>> charge_now(transaction:Transaction, cart:IEnumerable<Item>?) : Task<IActionResult>
+    - isExist(id:int) : int
+}
+Controller <|-- CartController
+CartController --> "_context" ApplicationDbContext
+@enduml

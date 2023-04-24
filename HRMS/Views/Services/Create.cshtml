@@ -1,0 +1,128 @@
+﻿@model HRMS.Models.Service
+
+@{
+    ViewData["Title"] = "Create New Service";
+}
+
+@*<h1>Create</h1>*@
+
+<div class="container">
+
+    <form asp-action="Create">
+        <div class="row mb-5">
+            <h4>Create a new Service</h4>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Capacity" class="form-label"></label>
+                    <input asp-for="Capacity" class="form-control" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PricingType" class="form-label"></label>
+                    <select asp-for="PricingType" class="form-select" asp-items="Html.GetEnumSelectList<PricingType>()"></select>
+                    <span asp-validation-for="PricingType" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <lable class="form-label">Opening Hour:</lable>
+                    <select name="OpenedHour" class="form-select">
+                        @for (int i = 1; i <= 24; i++)
+                        {
+                            @if (i < 10)
+                            {
+                                string iString = i.ToString();
+                                iString = "0" + iString;
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                    <lable class="form-label">Minute:</lable>
+                    <select name="OpenedMinute" class="form-select">
+                        @for (int i = 0; i <= 60; i = i + 10)
+                        {
+                            @if (i == 0)
+                            {
+                                string iString = i.ToString();
+                                iString = "00";
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <lable class="form-label">Closing Hour:</lable>
+                    <select name="ClosedHour" class="form-select">
+                        @for (int i = 1; i <= 24; i++)
+                        {
+                            @if (i < 10)
+                            {
+                                string iString = i.ToString();
+                                iString = "0" + iString;
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                    <lable class="form-label">Minute:</lable>
+                    <select name="ClosedMinute" class="form-select">
+                        @for (int i = 0; i <= 60; i = i + 10)
+                        {
+                            @if (i == 0)
+                            {
+                                string iString = i.ToString();
+                                iString = "00";
+                                <option value="@iString">@iString</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="mb-3" hidden>
+                    <label asp-for="Status" class="form-label"></label>
+                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<ServiceStatus>()"></select>
+                    <span asp-validation-for="PricingType" class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <a asp-action="Index" class="btn btn-info">
+            <i class="material-icons">keyboard_backspace</i>
+            Back
+        </a>
+        <input type="submit" value="Create" class="btn btn-primary mx-3" />
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

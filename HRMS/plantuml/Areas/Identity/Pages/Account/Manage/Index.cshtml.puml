@@ -1,0 +1,22 @@
+@startuml
+class IndexModel {
+    + IndexModel(userManager:UserManager<IdentityUser>, signInManager:SignInManager<IdentityUser>)
+    + Username : string <<get>> <<set>>
+    + StatusMessage : string <<get>> <<set>>
+    - <<async>> LoadAsync(user:IdentityUser) : Task
+    + <<async>> OnGetAsync() : Task<IActionResult>
+    + <<async>> OnPostAsync() : Task<IActionResult>
+}
+class "UserManager`1"<T> {
+}
+class "SignInManager`1"<T> {
+}
+class InputModel {
+    + PhoneNumber : string <<get>> <<set>>
+}
+PageModel <|-- IndexModel
+IndexModel --> "_userManager<IdentityUser>" "UserManager`1"
+IndexModel --> "_signInManager<IdentityUser>" "SignInManager`1"
+IndexModel --> "Input" InputModel
+IndexModel +-- InputModel
+@enduml

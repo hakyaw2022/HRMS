@@ -1,0 +1,40 @@
+﻿@model HRMS.Models.CheckedInOutTime
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<h1>Details</h1>*@
+
+
+<div class="container">
+    <div class="row mb-5">
+        <h4>CheckedInOutTime</h4>
+    </div>
+    <dl class="row mb-5">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoomType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckedInTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CheckedInTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckedOutTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CheckedOutTime)
+        </dd>
+    </dl>
+
+    <a asp-action="Index" class="btn btn-info">
+        <i class="material-icons">keyboard_backspace</i>
+        Back
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary mx-3">Edit</a>
+</div>

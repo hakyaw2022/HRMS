@@ -1,0 +1,49 @@
+﻿@model HRMS.Models.Guest
+
+@{
+    ViewData["Title"] = "Check In";
+}
+
+<div class="container">
+
+    <form asp-action="CheckIn">
+        <div class="row mb-5">
+
+            <h4>Check in <i>@ViewBag.RoomName</i></h4>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label">Deposit</label>
+                    <input name="Deposit" type="number" min="0" class="form-control" value="@ViewBag.Price" />
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @for (int i = 1; i <= 1; i++)
+                {
+                    string guest = "Guest" + i.ToString();
+                    <div class="mb-3">
+                        @*<label class="form-label">Guest @i</label>*@
+                        <label class="form-label">Guest</label>
+                        <select name=@guest class="form-select" asp-items="ViewBag.GuestId">
+                            <option value="" selected>Select Guest</option>
+                        </select>
+                    </div>
+                }
+
+                <input type="hidden" name="RoomId" value="@ViewBag.RoomId" />
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="IndexReserved" class="btn btn-info">
+                <i class="material-icons">keyboard_backspace</i>
+                Back
+            </a>
+            <input type="submit" value="Check In" class="btn btn-primary mx-3" />
+        </div>
+    </form>
+</div>
+
+
+
